@@ -68,7 +68,9 @@ class _HomePageState extends StateMVC<HomePage> {
               ),
             );
           }
+
           int? itemCountPerPage = snapshot.data!.length;
+
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -90,18 +92,19 @@ class _HomePageState extends StateMVC<HomePage> {
                       if (scrollController.position.pixels ==
                           scrollController.position.maxScrollExtent) {
                         setState(() {
-                          itemCountPerPage = 10;
                           pageNo = 2;
                           loadingItems = 5;
+                          itemCountPerPage = itemCountPerPage! + loadingItems!;
                         });
                       } else {
                         setState(() {
-                          itemCountPerPage = snapshot.data!.length;
                           pageNo = 1;
                           loadingItems = 5;
+                          itemCountPerPage = itemCountPerPage! - loadingItems!;
                         });
                       }
                     });
+
                     return UserDetailsWidget(
                       userFirstName: snapshot.data![index].firstName,
                       userLastName: snapshot.data![index].lastName,
