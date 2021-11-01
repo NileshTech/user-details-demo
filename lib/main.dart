@@ -13,7 +13,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  // This widget is the root of  application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,19 +55,14 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initConnectivity() async {
     ConnectivityResult result = ConnectivityResult.none;
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await _connectivity.checkConnectivity();
     } on PlatformException catch (e) {
       print(e.toString());
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) {
       return Future.value(null);
     }
@@ -107,6 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     switch (result) {
       case ConnectivityResult.wifi:
+        setState(() {
+          InternetConnectivityEnvirement.connectedToInternet = true;
+        });
+        break;
       case ConnectivityResult.mobile:
         setState(() {
           InternetConnectivityEnvirement.connectedToInternet = true;
