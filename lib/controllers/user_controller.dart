@@ -16,7 +16,7 @@ class UserController extends ControllerMVC {
 
   getTodayUser() async {
     try {
-      userModelList = await getUsersFromAPI();
+      userModelList = await getUsersFromAPI(1, 5);
       setState(() {});
     } catch (e) {
       globalkey.currentState!.showSnackBar(
@@ -24,8 +24,9 @@ class UserController extends ControllerMVC {
     }
   }
 
-  Future<List<UserModel>> getTodayUserAsStream() async {
-    List<UserModel> dataStream = await getUsersFromAPI();
+  Future<List<UserModel>> getTodayUserAsStream(
+      int? pageCount, int? perPage) async {
+    List<UserModel> dataStream = await getUsersFromAPI(pageCount, perPage);
     return dataStream;
   }
 }

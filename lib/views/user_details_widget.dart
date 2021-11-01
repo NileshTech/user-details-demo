@@ -117,6 +117,7 @@ class _UserDetailsWidgetState extends State<UserDetailsWidget> {
                     child: Image.network(
                       widget.userAvatar!,
                       height: MediaQuery.of(context).size.height * 0.1,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                 ),
